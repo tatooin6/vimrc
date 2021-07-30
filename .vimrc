@@ -79,12 +79,20 @@ Plug 'vim-airline/vim-airline-themes'
 " Seing color on editor
 Plug 'ap/vim-css-color'
 
+" Snippets
+" Track the engine.
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
 call plug#end()
 
 colorscheme gruvbox
 let g:gruvbox_contrast_dark = "hard"
 
+" NERDTree
 let NERDTreeQuitOnOpen=1
+let NERDTreeShowHidden=1
 
 let mapleader=" "
 
@@ -160,6 +168,9 @@ nmap <Leader>nt :NERDTreeFind<CR>
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
 
+" CLEAN Searched
+nmap <Leader>l :noh<CR>
+
 " GIT
 " nmap <Leader>g :Git
 " Derecha
@@ -168,8 +179,18 @@ nmap <Leader>gj :diffget //3<CR>
 nmap <Leader>gf :diffget //2<CR>
 nmap <Leader>gs :G<CR>
 
+" UltiSnips CONFIGURATION
+let g:UltiSnipsEditSplit="verttical"
+let g:UltiSnipsExpandTrigger="<c-space>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsBackwardTrigger="<c-z>"
 
+" fzf config
+nmap <Leader>b :Buffers<CR>
+
+" ////////////////////////////////
 " CONFIGURATION FOR TYPESCRIPT CoC
+" ////////////////////////////////
 
 " Some servers have issues with backup files, see #649.
 set nobackup

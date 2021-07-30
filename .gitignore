@@ -1,0 +1,111 @@
+.TRIGGERcmdData/
+.VirtualBox/
+.android/
+.bash_history
+.cisco/
+.config/
+.docker/
+.dotnet/
+.expo/
+.gitconfig
+.lesshst
+.librarymanager/
+.mume/
+.node_repl_history
+.nuget/
+.ssh/
+.vim/
+.viminfo
+.vimrcBck30042021
+.vscode/
+.yarnrc
+"3D Objects/"
+AppData/Local/.IdentityService/
+AppData/Local/Apowersoft/
+AppData/Local/Battle.net/
+"AppData/Local/Blizzard Entertainment/"
+AppData/Local/BraveSoftware/
+AppData/Local/CEF/
+AppData/Local/Cisco/
+AppData/Local/Comms/
+AppData/Local/ConnectedDevicesPlatform/
+AppData/Local/CrashDumps/
+AppData/Local/D3DSCache/
+"AppData/Local/Docker Desktop Installer/"
+AppData/Local/Docker/
+AppData/Local/Expo/
+AppData/Local/Figma/
+AppData/Local/FigmaAgent/
+AppData/Local/FluxSoftware/
+AppData/Local/Google/
+AppData/Local/Greenshot/
+AppData/Local/IconCache.db
+AppData/Local/IdentityNexusIntegration/
+AppData/Local/IsolatedStorage/
+AppData/Local/Kite/
+"AppData/Local/MSfree Inc/"
+AppData/Local/MiPhoneManager/
+AppData/Local/Microsoft/
+AppData/Local/Microsoft_Corporation/
+AppData/Local/MongoDBCompass/
+AppData/Local/Mozilla/
+"AppData/Local/NVIDIA Corporation/"
+AppData/Local/NVIDIA/
+AppData/Local/NuGet/
+AppData/Local/OneDrive/
+"AppData/Local/Package Cache/"
+AppData/Local/Packages/
+AppData/Local/PlaceholderTileLogoFolder/
+AppData/Local/Postman/
+AppData/Local/Programs/
+AppData/Local/Publishers/
+AppData/Local/ServiceHub/
+AppData/Local/Spotify/
+AppData/Local/SquirrelTemp/
+AppData/Local/TRIGGERcmdAgent/
+AppData/Local/TeamViewer/
+AppData/Local/Temp/
+AppData/Local/WhatsApp/
+AppData/Local/Yarn/
+AppData/Local/cache/
+AppData/Local/coc/
+AppData/Local/com.vercel.cli/
+AppData/Local/hyper/
+AppData/Local/node-gyp/
+AppData/Local/notion-updater/
+AppData/Local/nvim-data/
+AppData/Local/nvim/pack/
+AppData/Local/pgadmin4/
+AppData/Local/pip/
+AppData/Local/recently-used.xbel
+AppData/Local/speech/
+AppData/Local/udeler-updater/
+AppData/LocalLow/
+AppData/Roaming/
+3D Objects/
+AppData/Local/Blizzard Entertainment/
+AppData/Local/Docker Desktop Installer/
+AppData/Local/MSfree Inc/
+AppData/Local/NVIDIA Corporation/
+AppData/Local/Package Cache/
+Saved Games/
+Contacts/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Music/
+OneDrive/
+Pictures/
+Saved Games/
+Searches/
+Tracing/
+Videos/
+node_modules/
+ntuser.dat.LOG1
+ntuser.dat.LOG2
+ntuser.ini
+python/
+source/
+vimfiles/
