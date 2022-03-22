@@ -85,6 +85,12 @@ Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 
+" Telescope
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 
 colorscheme gruvbox
@@ -187,6 +193,15 @@ let g:UltiSnipsBackwardTrigger="<c-z>"
 
 " fzf config
 nmap <Leader>b :Buffers<CR>
+
+" Telescope configurations
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep prompt_prefix<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+nnoremap <leader>fs <cmd>Telescope git_status<cr>
+nnoremap <leader>fc <cmd>Telescope command_history<cr>
 
 " ////////////////////////////////
 " CONFIGURATION FOR TYPESCRIPT CoC
