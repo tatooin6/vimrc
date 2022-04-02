@@ -109,3 +109,19 @@ ntuser.ini
 python/
 source/
 vimfiles/
+.templateengine/
+AppData/Local/ASP.NET/
+"AppData/Local/Epic Games/"
+AppData/Local/EpicGamesLauncher/
+AppData/Local/GoPro_Inc/
+AppData/Local/HiSuite/
+AppData/Local/QMK/
+AppData/Local/UnrealEngine/
+AppData/Local/calibre-cache/
+"Biblioteca de calibre/"
+Mirror/
+NTUSER.DAT
+NTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TM.blf
+NTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TMContainer00000000000000000001.regtrans-ms
+NTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TMContainer00000000000000000002.regtrans-ms
+qmk_firmware/
