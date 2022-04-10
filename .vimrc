@@ -87,6 +87,9 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+" LSP
+Plug 'neovim/nvim-lspconfig'
+
 call plug#end()
 
 colorscheme gruvbox
