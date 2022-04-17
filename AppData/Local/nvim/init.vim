@@ -170,8 +170,8 @@ set hidden
 set scrolloff=8
 set signcolumn=yes
 set colorcolumn=80
-
 set showtabline=2 " Always show tabs
+set title
 
 " NERDTree
 let NERDTreeQuitOnOpen=1
