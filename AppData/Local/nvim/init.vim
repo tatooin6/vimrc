@@ -1,3 +1,11 @@
+
+" ██╗███╗░░██╗██╗████████╗░░░██╗░░░██╗██╗███╗░░░███╗
+" ██║████╗░██║██║╚══██╔══╝░░░██║░░░██║██║████╗░████║
+" ██║██╔██╗██║██║░░░██║░░░░░░╚██╗░██╔╝██║██╔████╔██║
+" ██║██║╚████║██║░░░██║░░░░░░░╚████╔╝░██║██║╚██╔╝██║
+" ██║██║░╚███║██║░░░██║░░░██╗░░╚██╔╝░░██║██║░╚═╝░██║
+" ╚═╝╚═╝░░╚══╝╚═╝░░░╚═╝░░░╚═╝░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
+
 "---- vim-plug setup  ----
 " let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 " if has('win32')&&!has('win64')
@@ -35,6 +43,13 @@ Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 " LSP and Auto-Completion
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+
+" CMP Autocompletion
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -75,6 +90,7 @@ Plug 'ap/vim-css-color'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips' " For CMP autocompletion
  
 " Telescope
 Plug 'kyazdani42/nvim-web-devicons'
@@ -172,6 +188,8 @@ set signcolumn=yes
 set colorcolumn=80
 set showtabline=2 " Always show tabs
 set title
+
+set completeopt=menu,menuone,noselect " CPM autocompletion
 
 " NERDTree
 let NERDTreeQuitOnOpen=1
