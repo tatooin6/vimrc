@@ -4,6 +4,23 @@
   local cmp = require'cmp'
 
   cmp.setup({
+    -- Formatting the displayed completion
+    formatting = {
+      format = function(entry, vim_item)
+        -- vim_item.kind = 'kind'
+        -- vim_item.menu = 'menu'
+        vim_item.menu = ({
+          nvim_lsp = "[LSP]",
+          look = "[Dict]",
+          buffer = "[Buffer]",
+          path = "[Path]",
+          ultisnips = "[Snip]",
+          gh_issues = "[Issues]"
+        })[entry.source.name]
+        return vim_item
+      end
+    },
+
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
@@ -32,7 +49,8 @@
       -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
-    })
+    }),
+
   })
 
   -- Set configuration for specific filetype.
@@ -61,6 +79,7 @@
       { name = 'cmdline' }
     })
   })
+
 
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
