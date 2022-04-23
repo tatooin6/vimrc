@@ -43,6 +43,7 @@ Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 " LSP and Auto-Completion
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'neoclide/npm.nvim', {'do' : 'npm install'}
 
 " CMP Autocompletion
 Plug 'hrsh7th/cmp-nvim-lsp'
