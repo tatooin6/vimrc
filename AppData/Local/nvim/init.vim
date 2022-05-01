@@ -128,7 +128,7 @@ let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
-let g:airline_section_x = ''
+" let g:airline_section_x = '' " Filetype
 let g:airline_section_y = ''
 " 
 if !exists('g:airline_symbols')
@@ -239,9 +239,15 @@ nnoremap <leader>fc <cmd>Telescope command_history<cr>
 
 " UltiSnips CONFIGURATION
 let g:UltiSnipsEditSplit="verttical"
-let g:UltiSnipsExpandTrigger="<c-space>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsBackwardTrigger="<c-z>"
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " fzf config
 nmap <Leader>b :Buffers<CR>
