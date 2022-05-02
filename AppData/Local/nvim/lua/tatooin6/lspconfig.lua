@@ -1,119 +1,94 @@
--- :lua << EOF
-  local nvim_lsp = require('lspconfig')
+local lspconfig = require("lspconfig")
+local null_ls = require("null-ls")
+local util = require('vim.lsp.util')
 
-  local on_attach = function(client, bufnr)
-    require('completion').on_attach()
-
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Mappings
-    local opts = { noremap=true, silent=true }
-    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-
-    -- Set some keybinds conditional on server capabilities
-    if client.resolved_capabilities.document_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    elseif client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    end
-
-    -- Set autocommands conditional on server_capabilities
-    -- if client.resolved_capabilities.document_highlight then
-    --     require('lspconfig').util.nvim_multiline_command [[
-    --     :hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-    --     :hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-    --     :hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-    --     augroup lsp_document_highlight
-    --     autocmd!
-    --     autocmd CursorHold lua vim.lsp.buf.document_highlight()
-    --     autocmd CursorMoved lua vim.lsp.buf.clear_references()
-    --     augroup END
-    --     ]]
-    -- end
-	
-	require('completion').on_attach(client)
-  end
-
-  local servers = {'tsserver'}
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-    }
-  end
-
--- Default TSSERVER configuration
-
-local util = require('lspconfig.util')
-
-local bin_name = 'typescript-language-server'
-local cmd = { bin_name, '--stdio' }
-
-if vim.fn.has 'win32' == 1 then
-  cmd = { 'cmd.exe', '/C', bin_name, '--stdio' }
+local buf_map = function(bufnr, mode, lhs, rhs, opts)
+    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+        silent = true,
+    })
 end
 
-return {
-  default_config = {
-    init_options = { hostInfo = 'neovim' },
-    cmd = cmd,
-    filetypes = {
-      'javascript',
-      'javascriptreact',
-      'javascript.jsx',
-      'typescript',
-      'typescriptreact',
-      'typescript.tsx',
-    },
-    root_dir = function(fname)
-      return util.root_pattern 'tsconfig.json'(fname)
-        or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
+-- on_attach
+local on_attach = function(client, bufnr)
+    vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
+    vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
+    vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
+    vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
+    vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
+    vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
+    vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
+    vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
+    vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
+    vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
+    vim.cmd("command! LspDiagLine lua vim.diagnostic.open_float()")
+    vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
+    buf_map(bufnr, "n", "gd", ":LspDef<CR>")
+    buf_map(bufnr, "n", "gr", ":LspRename<CR>")
+    buf_map(bufnr, "n", "gn", ":LspRefs<CR>")
+    buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
+    buf_map(bufnr, "n", "K", ":LspHover<CR>")
+    buf_map(bufnr, "n", "[a", ":LspDiagPrev<CR>")
+    buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>")
+    buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>")
+    buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>")
+    buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>")
+    if client.resolved_capabilities.document_formatting then
+        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    end
+end
+
+
+-- LSP config
+lspconfig.tsserver.setup({
+    on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+        local ts_utils = require("nvim-lsp-ts-utils")
+        ts_utils.setup({})
+        ts_utils.setup_client(client)
+        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
+        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
+        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
+        formatting_callback(client, bufnr)
+        common_on_attach(client, bufnr)
+        on_attach(client, bufnr)
     end,
-  },
-  docs = {
-    description = [[
-https://github.com/theia-ide/typescript-language-server
-`typescript-language-server` depends on `typescript`. Both packages can be installed via `npm`:
-```sh
-npm install -g typescript typescript-language-server
-```
-To configure type language server, add a
-[`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) or
-[`jsconfig.json`](https://code.visualstudio.com/docs/languages/jsconfig) to the root of your
-project.
-Here's an example that disables type checking in JavaScript files.
-```json
-{
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "checkJs": false
-  },
-  "exclude": [
-    "node_modules"
-  ]
-}
-```
-]],
-    default_config = {
-      root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
+})
+
+-- NullLS
+null_ls.setup({
+    sources = {
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.code_actions.eslint,
+        null_ls.builtins.formatting.prettier,
     },
-  },
-}
--- EOF
+    on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+        on_attach(client)
+    end,
+})
+
+-- local util = require 'vim.lsp.util'
+local formatting_callback = function(client, bufnr)
+  vim.keymap.set('n', '<leader>f', function()
+    local params = util.make_formatting_params({})
+    client.request('textDocument/formatting', params, nil, bufnr) 
+  end, { buffer = bufnr })
+end
+
+local servers = {'tsserver', 'null_ls'}
+for _, server in ipairs(servers) do
+  lspconfig[server].setup {
+    on_attach = function(client, bufnr)
+      if client.name ~= 'null_ls' then
+        formatting_callback(client, bufnr)
+      end
+      common_on_attach(client, bufnr)
+    end
+  }
+end
+
+-- DOC:
+-- https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
+-- https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ#i-see-multiple-formatting-options-and-i-want-a-single-server-to-format-how-do-i-do-this

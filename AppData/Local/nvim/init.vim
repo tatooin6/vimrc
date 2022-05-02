@@ -44,6 +44,8 @@ Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'neoclide/npm.nvim', {'do' : 'npm install'}
+Plug 'jose-elias-alvarez/null-ls.nvim' " LSP_TS
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils' " LSP_TS
 
 " CMP Autocompletion
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -164,7 +166,7 @@ set expandtab
 set smartindent
 set tabstop=2 softtabstop=2
 set cmdheight=2
-set updatetime=50
+set updatetime=1000 "50
 set signcolumn=yes
 
 " Custom Settings
@@ -185,28 +187,35 @@ set incsearch
 set shiftwidth=2
 set hidden
 set scrolloff=8
-set signcolumn=yes
 set colorcolumn=80
 set showtabline=2 " Always show tabs
 set title
 
 set completeopt=menu,menuone,noselect " CPM autocompletion
-
 " NERDTree
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 
 " GitGutter for git - Use fontawesome icons as signs
-let g:gitgutter_git_executable = 'C:\Program Files\Git\bin\git.exe'
+let g:gitgutter_enabled = 1
+let g:gitgutter_map_keys = 0
+let g:gitgutter_git_executable = "C:\\PROGRA~1\\Git\\bin\\git.exe"
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '>'
 let g:gitgutter_sign_removed = '-'
 let g:gitgutter_sign_removed_first_line = '^'
 let g:gitgutter_sign_modified_removed = '<'
+" let g:gitgutter_override_sign_column_highlight = 1
+" let g:gitgutter_log = 1
+let g:gitgutter_async=0
 
-let g:gitgutter_override_sign_column_highlight = 1
-highlight SignColumn guibg=bg
+highlight GitGutterAdd guifg=#009900 ctermfg=Green
+highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
+highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
+" highlight SignColumn guibg=bg
 " highlight SignColumn ctermbg=bg
+nmap ) <Plug>(GitGutterNextHunk)
+nmap ( <Plug>(GitGutterPrevHunk)
 
 " SEARCH
 nmap <Leader>s <Plug>(easymotion-s2)
