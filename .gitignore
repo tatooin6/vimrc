@@ -19,6 +19,7 @@
 .vimrcBck30042021
 .vscode/
 .yarnrc
+.templateengine/
 "3D Objects/"
 AppData/Local/.IdentityService/
 AppData/Local/Apowersoft/
@@ -82,6 +83,19 @@ AppData/Local/speech/
 AppData/Local/udeler-updater/
 AppData/LocalLow/
 AppData/Roaming/
+AppData/Local/ASP.NET/
+AppData/Local/Adobe/
+AppData/Local/Apple Computer/
+AppData/Local/Epic Games/
+AppData/Local/EpicGamesLauncher/
+AppData/Local/GoPro_Inc/
+AppData/Local/KidAMnesia/
+AppData/Local/LGHUB/
+AppData/Local/PUTTY.RND
+AppData/Local/QMK/
+AppData/Local/TogglDesktop/
+AppData/Local/UnrealEngine/
+AppData/Local/calibre-cache/
 3D Objects/
 AppData/Local/Blizzard Entertainment/
 AppData/Local/Docker Desktop Installer/
@@ -109,3 +123,10 @@ ntuser.ini
 python/
 source/
 vimfiles/
+Biblioteca de calibre/
+Mirror/
+NTUSER.DAT
+NTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TM.blf
+NTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TMContainer00000000000000000001.regtrans-ms
+NTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TMContainer00000000000000000002.regtrans-ms
+qmk_firmware/
