@@ -6,29 +6,10 @@
 " ██║██║░╚███║██║░░░██║░░░██╗░░╚██╔╝░░██║██║░╚═╝░██║
 " ╚═╝╚═╝░░╚══╝╚═╝░░░╚═╝░░░╚═╝░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
 
-"---- vim-plug setup  ----
-" let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
-" if has('win32')&&!has('win64')
-"   let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
-" else
-"   let curl_exists=expand('curl')
-" endif
-" 
-" if !filereadable(vimplug_exists)
-"   if !executable(curl_exists)
-"     echoerr 'You have to install curl or first install vim-plug yourself!'
-"     execute 'q!'
-"   endif
-"   echo 'Installing Vim-Plug...'
-"   echo ''
-"   silent exec '!'curl_exists" -fLo ' . shellescape(vimplug_exists) . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-"   let g:not_finish_vimplug = 'yes'
-" 
-"   autocmd VimEnter * PlugInstall
-" endif
-"-------- end vim-plug setup ----
 
-set nocompatible
+" ==================================================================
+" ============================= Pluggins ===========================
+" ==================================================================
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -53,6 +34,10 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+
+" Lua Snippets
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -91,9 +76,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'ap/vim-css-color'
  
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips' " For CMP autocompletion
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'quangnguyen30192/cmp-nvim-ultisnips' " For CMP autocompletion
  
 " Telescope
 Plug 'kyazdani42/nvim-web-devicons'
@@ -103,11 +88,9 @@ Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
-" Automatically install missing plugins on startup
-" autocmd VimEnter *
-"   \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-"   \|   PlugInstall --sync | q
-"   \| endif
+" ==================================================================
+" ========================= Editor Settings ========================
+" ==================================================================
 
 let mapleader=" "
 
@@ -115,52 +98,11 @@ if has('termguicolors')
   set termguicolors
 endif
 
-" ColorSchema
-let g:tokyonight_style = 'storm'
-let g:tokyonight_italic_functions = 1
-let g:tokyonight_italic_comments = 1
-let g:tokyonight_sidebars = [ 'qf', 'vista_kind', 'terminal', 'packer' ]
-colorscheme tokyonight
-
-" air-line
-let g:airline_theme = 'base16'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#clock#auto = 1
-let g:airline#extensions#hunks#enabled=0
-let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 1
-" let g:airline_section_x = '' " Filetype
-let g:airline_section_y = ''
-" 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-  
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = 'ß'
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.paste = ' '
-let g:airline_symbols.colnr = ' C'
-let g:airline_symbols.maxlinenr = ' '
-let g:airline_symbols.crypt = ' '
-let g:airline_symbols.linenr = ' '
-let g:airline_symbols.spell = 'B'
-let g:airline_symbols.notexists = 'A'
-let g:airline_symbols.dirty=''
-let g:airline_symbols.whitespace = 'Ξ'
-
-
-" Editor Settings
 syntax enable
 filetype plugin indent on
 
+set nocompatible
 set nu rnu
-set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 set expandtab
 set smartindent
@@ -191,7 +133,58 @@ set colorcolumn=80
 set showtabline=2 " Always show tabs
 set title
 
-set completeopt=menu,menuone,noselect " CPM autocompletion
+augroup highlight_yank
+  autocmd!
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+augroup END
+
+" LUA settings
+" set completeopt=menuone,noinsert,noselect
+vim.opt.completeopt={"menu", "menuone", "noselect"} 
+
+" ==================================================================
+" ====================== Plugins Configuration =====================
+" ==================================================================
+
+" ColorSchema
+let g:tokyonight_style = 'storm'
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_italic_comments = 1
+let g:tokyonight_sidebars = [ 'qf', 'vista_kind', 'terminal', 'packer' ]
+colorscheme tokyonight
+
+" Air-line
+let g:airline_theme = 'base16'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#clock#auto = 1
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
+" let g:airline_section_x = '' " Filetype
+let g:airline_section_y = ''
+" 
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+  
+" Airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = 'ß'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.paste = ' '
+let g:airline_symbols.colnr = ' C'
+let g:airline_symbols.maxlinenr = ' '
+let g:airline_symbols.crypt = ' '
+let g:airline_symbols.linenr = ' '
+let g:airline_symbols.spell = 'B'
+let g:airline_symbols.notexists = 'A'
+let g:airline_symbols.dirty=''
+let g:airline_symbols.whitespace = 'Ξ'
+
 " NERDTree
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
@@ -208,7 +201,6 @@ let g:gitgutter_sign_modified_removed = '<'
 " let g:gitgutter_override_sign_column_highlight = 1
 " let g:gitgutter_log = 1
 let g:gitgutter_async=0
-
 highlight GitGutterAdd guifg=#009900 ctermfg=Green
 highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
 highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
@@ -222,6 +214,7 @@ nmap <Leader>s <Plug>(easymotion-s2)
 
 " MENU
 nmap <Leader>nt :NERDTreeFind<CR>
+
 " SAVE AND QUIT
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
@@ -242,45 +235,12 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep prompt_prefix<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
 nnoremap <leader>fs <cmd>Telescope git_status<cr>
 nnoremap <leader>fc <cmd>Telescope command_history<cr>
 
-" UltiSnips CONFIGURATION
-let g:UltiSnipsEditSplit="verttical"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsBackwardTrigger="<c-z>"
-" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-" - https://github.com/Valloric/YouCompleteMe
-" - https://github.com/nvim-lua/completion-nvim
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" fzf config
+" Fzf config
 nmap <Leader>b :Buffers<CR>
 
-augroup highlight_yank
-  autocmd!
-  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
-augroup END
-
 " -------------------- LSP ---------------------------------
-
 lua require('tatooin6') 
-
-" Use completion-nvim in every buffer
-autocmd BufEnter * lua require'completion'.on_attach()
-
-" Completion
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
- 
-" Avoid showing message extra message when using completion
-set shortmess+=c
 " -------------------- LSP ---------------------------------
