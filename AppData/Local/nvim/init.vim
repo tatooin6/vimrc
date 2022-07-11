@@ -102,36 +102,6 @@ syntax enable
 filetype plugin indent on
 
 set nocompatible
-set nu rnu
-set shortmess+=c
-set expandtab
-set smartindent
-set tabstop=2 softtabstop=2
-set cmdheight=2
-set updatetime=1000 "50
-set signcolumn=yes
-
-" Custom Settings
-set mouse=a
-set numberwidth=1
-set clipboard=unnamed
-set showcmd
-set ruler
-set cursorline
-set encoding=utf-8
-set showmatch
-set sw=2
-set laststatus=2
-set showmode
-" set t_Co=256
-set smartcase
-set incsearch
-set shiftwidth=2
-set hidden
-set scrolloff=8
-set colorcolumn=80
-set showtabline=2 " Always show tabs
-set title
 
 augroup highlight_yank
   autocmd!
@@ -140,7 +110,40 @@ augroup END
 
 " LUA settings
 " set completeopt=menuone,noinsert,noselect
+lua << EOF
 vim.opt.completeopt={"menu", "menuone", "noselect"} 
+vim.opt.number=true
+vim.opt.relativenumber=true
+vim.opt.showmode=true
+vim.opt.expandtab=true
+vim.opt.shortmess:append "c"
+vim.opt.expandtab=true
+vim.opt.smartindent=true
+vim.opt.tabstop=4
+vim.opt.softtabstop=4
+vim.opt.cmdheight=2
+vim.opt.updatetime=1000
+vim.opt.signcolumn="yes"
+vim.opt.mouse="a"
+vim.opt.numberwidth=1
+vim.opt.clipboard="unnamedplus"
+vim.opt.showcmd=true
+vim.opt.ruler=true
+vim.opt.cursorline=true
+vim.opt.encoding="utf-8"
+vim.opt.showmatch=true
+vim.opt.sw=2
+vim.opt.laststatus=2
+vim.opt.smartcase=true
+vim.opt.incsearch=true
+vim.opt.shiftwidth=2
+vim.opt.hidden=true
+vim.opt.scrolloff=8
+vim.opt.colorcolumn="80"
+vim.opt.showtabline=2 -- Always show tabs
+vim.opt.title=true
+EOF
+" `vim.opt.relativenumber=true
 
 " ==================================================================
 " ====================== Plugins Configuration =====================
