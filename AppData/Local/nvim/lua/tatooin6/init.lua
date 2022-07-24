@@ -1,3 +1,21 @@
+-- TreeSitter Configuration
+-- Docs: https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/treesitter.lua
+require'nvim-treesitter.configs'.setup({
+  ensure_installed = "all", -- one of "all" or a list of languages
+  ignore_install = { "" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true, -- false will disable the whole extension
+    disable = { "css", "markdown" }, -- list of language that will be disabled
+  },
+  autopairs = {
+    enable = true,
+  },
+  indent = { enable = true, disable = { "python", "css" } },
+})
+-- require'tree-sitter-typescript'.typescript -- TypeScript grammar
+-- require'tree-sitter-typescript'.tsx -- TSX grammar
+  
+-- CPM Config
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- NVIM LSP SETUP
