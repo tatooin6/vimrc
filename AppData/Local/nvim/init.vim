@@ -36,8 +36,8 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
 " Lua Snippets
-Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -102,7 +102,8 @@ if has('termguicolors')
 endif
 
 syntax enable
-filetype plugin indent on
+" filetype indent off
+" filetype plugin indent on
 
 set nocompatible
 
@@ -110,6 +111,10 @@ augroup highlight_yank
   autocmd!
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
+
+" Enable Flexpage files
+autocmd BufRead,BufNewFile *.flexpage set filetype=json
+autocmd BufRead,BufNewFile *.flexpartial set filetype=json
 
 " LUA settings
 " set completeopt=menuone,noinsert,noselect
@@ -121,9 +126,11 @@ vim.opt.showmode=true
 vim.opt.expandtab=true
 vim.opt.shortmess:append "c"
 vim.opt.expandtab=true
-vim.opt.smartindent=true
 vim.opt.tabstop=4
+vim.opt.shiftwidth=4
 vim.opt.softtabstop=4
+-- vim.opt.autoindent=true
+vim.opt.smartindent=true
 vim.opt.cmdheight=2
 vim.opt.updatetime=1000
 vim.opt.signcolumn="yes"
@@ -139,11 +146,11 @@ vim.opt.sw=2
 vim.opt.laststatus=2
 vim.opt.smartcase=true
 vim.opt.incsearch=true
-vim.opt.shiftwidth=2
 vim.opt.hidden=true
 vim.opt.scrolloff=8
 vim.opt.colorcolumn="80"
 vim.opt.showtabline=2 -- Always show tabs
+vim.opt.wrap=false
 vim.opt.title=true
 EOF
 " `vim.opt.relativenumber=true

@@ -10,7 +10,7 @@ require'nvim-treesitter.configs'.setup({
   autopairs = {
     enable = true,
   },
-  indent = { enable = true, disable = { "python", "css" } },
+  indent = { enable = false, disable = { "python", "css" } },
 })
 -- require'tree-sitter-typescript'.typescript -- TypeScript grammar
 -- require'tree-sitter-typescript'.tsx -- TSX grammar
