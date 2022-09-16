@@ -89,6 +89,9 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+" Ack
+Plug 'dyng/ctrlsf.vim'
+
 call plug#end()
 
 " ==================================================================
@@ -115,6 +118,36 @@ augroup END
 " Enable Flexpage files
 autocmd BufRead,BufNewFile *.flexpage set filetype=json
 autocmd BufRead,BufNewFile *.flexpartial set filetype=json
+
+" CtrlSF
+nmap <leader>a :CtrlSF -R ""<Left>
+nmap <leader>A <Plug>CtrlSFCwordPath -W<CR>
+nmap <leader>c :CtrlSFFocus<CR>
+nmap <leader>C :CtrlSFToggle<CR>
+
+" nmap     <leader>f <Plug>CtrlSFPrompt
+" vmap     <leader>f <Plug>CtrlSFVwordPath
+" vmap     <leader>F <Plug>CtrlSFVwordExec
+" nmap     <leader>n <Plug>CtrlSFCwordPath
+" nmap     <leader>p <Plug>CtrlSFPwordPath
+" nnoremap <leader>o :CtrlSFOpen<CR>
+" nnoremap <leader>t :CtrlSFToggle<CR>
+" inoremap <leader>t <Esc>:CtrlSFToggle<CR>
+
+" if has("macunix")
+"  let g:ctrlsf_ackprg = '/usr/local/bin/rg'
+" elseif has("unix")
+"  let g:ctrlsf_ackprg = '/usr/bin/rg'
+" endif
+
+let g:ctrlsf_debug_mode = 0
+let g:ctrlsf_winsize = '33%'
+let g:ctrlsf_auto_preview = 1
+let g:ctrlsf_auto_close = 0
+let g:ctrlsf_confirm_save = 0
+let g:ctrlsf_auto_focus = {
+    \ 'at': 'start',
+    \ }
 
 " LUA settings
 " set completeopt=menuone,noinsert,noselect
