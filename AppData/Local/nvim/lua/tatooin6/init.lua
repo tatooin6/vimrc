@@ -109,6 +109,13 @@ ls.add_snippets(nil, {
       dscr = "Console Log"
     }, {
         text({"console.log("}),insert(1,"to_print"),text({");"})
+      }),
+    snip({
+      trig = "mag",
+      namr = "Magenta Log",
+      dscr = "Console Log with magenta color"
+    }, {
+        text({"console.log("}),text({"\""}),insert(1,"to_print"),text("\""),text({", \"color:'Magenta'\");"})
       })
   },
 })
